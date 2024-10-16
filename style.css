@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffd700;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.instructions {
+    flex-basis: 30%;
+}
+
+.photo-bucket {
+    flex-basis: 30%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns of equal width */
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto; /* Add scroll if content exceeds max-height */   
+}
+
+.photo-bucket img {
+    width: 100%;
+    height: 100px; /* Set a fixed height */
+    object-fit: cover;
+    cursor: pointer
+}
+
+.ranked-list {
+    flex-basis: 30%;
+}
+
+.ranked-list div {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.ranked-list img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.ranked-list span {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
