@@ -8,14 +8,15 @@ window.addEventListener('error', (event) => {
 
 
 const createRankingApp = function () {
-    const photBucket = document.querySelector('.photo-bucket')
+    const photoBucket = document.querySelector('.photo-bucket')
+    const listsContainer = document.querySelector('.ranked-list')
     imgFiles.forEach((img, index) => {
         // console.log(img);
         // console.log(index);
         const image = document.createElement('img')
         image.src = img
         image.alt = imgCaptions[index]
-        photBucket.appendChild(image)
+        photoBucket.appendChild(image)
     })
 
     const imagesBucket = document.querySelectorAll('.photo-bucket img')
@@ -23,12 +24,12 @@ const createRankingApp = function () {
     
 
     imagesBucket.forEach(img => {
-        img.addEventListener('click', sortedList)
+        img.addEventListener('click', moveToRankedList)
     });
 
 
     let counter = 0
-    function sortedList() {
+    function moveToRankedList() {
         const container = document.createElement('div')
         const listNumber = document.createElement('span')
         counter += 1
@@ -47,14 +48,39 @@ const createRankingApp = function () {
 
         container.appendChild(listCaption)
 
-        const listsContainer = document.querySelector('.ranked-list')
+        container.addEventListener('click', moveBackToBucket)
         
         listsContainer.appendChild(container)
 
 
-        photBucket.removeChild(this)
+        photoBucket.removeChild(this)
 
 
+    }
+
+    
+    function moveBackToBucket() {
+        console.log(this);
+        const img = this.querySelector('img')
+        const newImg = document.createElement('img')
+        newImg.src = img.src
+        newImg.alt = img.alt
+        newImg.addEventListener('click', moveToRankedList)
+        
+        photoBucket.appendChild(newImg)
+        listsContainer.removeChild(this)
+
+        updateRankings()
+    }
+
+
+    function updateRankings() {
+        counter = 0
+        const rankedItems = listsContainer.querySelectorAll('div')
+        rankedItems.forEach((item, index) => {
+            counter = index + 1
+            item.querySelector('span').textContent = counter
+        })
     }
 
 
